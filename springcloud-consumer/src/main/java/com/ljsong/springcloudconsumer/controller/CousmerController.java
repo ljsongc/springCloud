@@ -1,5 +1,6 @@
 package com.ljsong.springcloudconsumer.controller;
 
+import com.ljsong.springcloudconsumer.feignClient.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,12 +19,20 @@ public class CousmerController {
     RestTemplate restTemplate;
 
     @Autowired
-    HttpServlet httpClient;
+    HelloService helloService;
 
-    @RequestMapping("/hello-consumer")
+    //消费方式1：ribbon+restTemplate
+    @RequestMapping("/hello-consumer-ribbon")
     public String helloConsumer() {
         //调用hello-service服务，注意这里用的是服务名，而不是具体的ip+port
         restTemplate.getForObject("http://hello-service/hello", String.class);
         return "hello consumer finish !!!";
+    }
+
+
+    //消费方式2：fegin
+    @RequestMapping("/hello-consumer-fegin")
+    public String helloConsumer1() {
+        return helloService.hello();
     }
 }
