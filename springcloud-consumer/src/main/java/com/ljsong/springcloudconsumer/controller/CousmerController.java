@@ -1,5 +1,6 @@
 package com.ljsong.springcloudconsumer.controller;
 
+import com.ljsong.springcloudconsumer.bean.HelloWorld;
 import com.ljsong.springcloudconsumer.feignclient.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,9 @@ public class CousmerController {
 
     @Autowired
     HelloService helloService;
+
+    @Autowired
+    HelloWorld helloWorld;
 
     /**
      * 消费方式1：ribbon+restTemplate
